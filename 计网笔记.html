@@ -11,6 +11,7 @@
     <a href="https://www.bilibili.com/video/BV1JV411t7ow/?spm_id_from=333.999.0.0&vd_source=8814c55673559083f0880c3918024708">视频资料</a><br/>
     <a href="#1st">第一章、概述</a><br/>
     <a href="#2nd">第二章、应用层</a><br/>
+    <a href="#3rd">第三章、传输层</a><br/>
     <h3 id="1st">概述</h3>
     <p>
         1.网络：节点、边、协议。<br/>
@@ -47,6 +48,34 @@
         非结构化P2P：集中化目录、完全分布式（泛洪、ping、pong）、混合体；<br/>
         DHT（结构化）P2P：BitTorrent洪流、块、追踪器、最稀缺优先、hash标识。<br/>
       12.CDN（内容分发网inter deep、bring home）、视频流DASH（告示文件：不同版本）。<br/>
+      13.socket...。<br/>
+    </p>
+    <h3 id="3rd">传输层</h3>
+    <p>
+      1.多路复用、解复用：socket。<br/>
+      2.可靠数据传输（rdt）：<br/>
+        （stop and wait）<br/>
+        rdt1.0；<br/>
+        rdt2.0：ACK、NAK；<br/>
+        rdt2.1：序号1/0、ACK、NAK；<br/>
+        rdt2.2：ACK1/0;<br/>
+        rdt3.0:超时重传、ACK1/0；<br/>
+        （pipeline）<br/>
+        滑动窗口协议slide window：发送窗口SW(前沿、后沿)<=发送缓存区、接收窗口RW、ACKn；<br/>
+        Go-Back-N（GBN）：RW=1、全部超时重发；<br/>
+        选择重传SR（Selective Repeat）：RW>1、部分超时重发。<br/>
+      3.TCP：字节流（序号）、MMS最大报文段长度、MTU最大传输单元（帧）；<br/>
+        往返延迟RTT、超时重传间隔；<br/>
+        快速重传（3个冗余ACK）、ACK生成策略（RFC 5681）；<br/>
+        流量控制：空闲缓冲区大小。<br/>
+      4.TCP连接：3次握手(C->S:SYN=1,seq),(S->C:SYN=1,sqe,ack),(C->S:SYN=0,seq,ack);<br/>
+        4次挥手(C->S:FIN=1),(S->C:ACK),客户端等待,(S->C:FIN=1),(C->S:ACK)。<br/>
+      5.拥塞控制：网络辅助拥塞控制：反馈信息（阻塞分组等）；<br/>
+        端到端拥塞控制：TCP拥塞控制算法<br/>
+        慢启动SS（CongWin拥塞窗口）：cw0=1MMS，ACK->cw++(RTT->cw=cw*2)；<br/>
+        拥塞避免CA：cw时拥塞（超时），cw/2为阈值，进入慢启动即cw=1MSS，cw=cw*2，到阈值时cw++；<br/>
+        快速恢复：cw时微小拥塞（3个冗余ACK），cw=cw/2，进入拥塞避免即cw++。<br/>
+        公平性：TCP拥塞控制大致公平。<br/>
     </p>
 </body>
 </html>
