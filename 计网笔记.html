@@ -12,6 +12,8 @@
     <a href="#1st">第一章、概述</a><br/>
     <a href="#2nd">第二章、应用层</a><br/>
     <a href="#3rd">第三章、传输层</a><br/>
+    <a href="#4th">第四章、网络层：数据平面</a><br/>
+    <a href="#5th">第五章、网络层：控制平面</a><br/>
     <h3 id="1st">概述</h3>
     <p>
         1.网络：节点、边、协议。<br/>
@@ -39,7 +41,7 @@
         回应报文：状态行、首部行、实体体；<br/>
         维护客户端状态：cookie（双方存）。<br/>
       8.Web缓存（代理服务器）、条件GET（检查是否修改）；<br/>
-        平均排队延迟：t=I/(1-I)*(L/R);(I/(1-I)为按概率推导出需等待分组的个数<a href="https://blog.csdn.net/weixin_51825055/article/details/132845024?ops_request_misc=&request_id=&biz_id=102&utm_term=%E6%8E%92%E9%98%9F%E6%97%B6%E5%BB%B6%E6%B5%81%E9%87%8F%E5%BC%BA%E5%BA%A6%E5%85%AC%E5%BC%8F&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-2-132845024.142^v96^control&spm=1018.2226.3001.4187">解释</a>)。<br/>
+        平均排队延迟：t=I/(1-I)*(L/R);(I/(1-I)为按概率推导出需等待分组的个数--><a href="https://blog.csdn.net/weixin_51825055/article/details/132845024?ops_request_misc=&request_id=&biz_id=102&utm_term=%E6%8E%92%E9%98%9F%E6%97%B6%E5%BB%B6%E6%B5%81%E9%87%8F%E5%BC%BA%E5%BA%A6%E5%85%AC%E5%BC%8F&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-2-132845024.142^v96^control&spm=1018.2226.3001.4187">解释</a>)。<br/>
       9.FTP：21、20；SMTP：25，握手。<br/>
       10.DNS：分布式、层次数据库（根、顶级、权威）；<br/>
         RR资源记录格式：name,value,type,TTL生存时间（name、value取决于type）；<br/>
@@ -76,6 +78,23 @@
         拥塞避免CA：cw时拥塞（超时），cw/2为阈值，进入慢启动即cw=1MSS，cw=cw*2，到阈值时cw++；<br/>
         快速恢复：cw时微小拥塞（3个冗余ACK），cw=cw/2，进入拥塞避免即cw++。<br/>
         公平性：TCP拥塞控制大致公平。<br/>
+    </p>
+    <h3 id="4th">网络层：数据平面</h3>
+    <p>
+      1.数据平面（转发）、控制平面（路由：传统、SDN）。<br/>
+      2.路由器（输入端口、交换结构、输出端口）：memory、bus、crossbar。<br/>
+      3.输入输出排队、分组调度。<br/>
+      4.IPv4：分片重组、（纯）子网、分类编址（A0/B10/C110/D1110）、特殊IP地址；<br/>
+        内网地址、无类域间路由（子网掩码、默认网关、子网前缀：聚集）动态主机配置协议DHCP；<br/>
+        网络地址转换NAT（内网地址）、NAT转换表、NAT穿越。<br/>
+      5.IPv6：隧道（v4->v6）。<br/>
+      6.SDN软件定义网络：流表、SDN控制器（南向、北向接口）。<br/>
+    </p>
+    <h3 id="5th">网络层：控制平面</h3>
+    <p>
+      1.路由选择算法：集中式（链路式LS）、分散式；静态、动态。<br/>
+      2.LS：Dijkstra算法、DV距离矢量算法（水平分裂/毒性逆转）。<br/>
+      3.RIP协议（DV）、OSPF协议（LS、边界）。<br/>
     </p>
 </body>
 </html>
