@@ -9,11 +9,13 @@
 <body>
     <h1>目录</h1>
     <a href="https://www.bilibili.com/video/BV1JV411t7ow/?spm_id_from=333.999.0.0&vd_source=8814c55673559083f0880c3918024708">视频资料</a><br/>
+    <a href="./网络协议分析.pdf">网络协议整理资料</a><br/>
     <a href="#1st">第一章、概述</a><br/>
     <a href="#2nd">第二章、应用层</a><br/>
     <a href="#3rd">第三章、传输层</a><br/>
     <a href="#4th">第四章、网络层：数据平面</a><br/>
     <a href="#5th">第五章、网络层：控制平面</a><br/>
+    <a href="#6th">第六章、链路层和局域网</a><br/>
     <h3 id="1st">概述</h3>
     <p>
         1.网络：节点、边、协议。<br/>
@@ -93,8 +95,29 @@
     <h3 id="5th">网络层：控制平面</h3>
     <p>
       1.路由选择算法：集中式（链路式LS）、分散式；静态、动态。<br/>
-      2.LS：Dijkstra算法、DV距离矢量算法（水平分裂/毒性逆转）。<br/>
+      2.LS：Dijkstra算法、DV距离矢量算法（水平分裂/毒性逆转）。（c++算法简单实现--><a href="./LSDV.cpp">LSDV.cpp</a>）<br/>
       3.RIP协议（DV）、OSPF协议（LS、边界）。<br/>
+      4.BGP边界网关协议：eBGP外部、iBGP内部、DV+路径。<br/>
+    </p>
+    <h3 id="6th">链路层和局域网</h3>
+    <p>
+      1.链路层服务：成帧、链路接入、可靠数据传输（部分）、流量控制、检查纠错、半双工与全双工。<br/>
+      2.网卡NIC（适配器）：MAC地址。<br/>
+      3.错误检测[D|EDC]:奇偶校验（单bit、2维）、CRC循环冗余校验码。<br/>
+      4.CRC：模2运算XOR、位串<-->多项式、生成多项式G（r+1位）、[D|R] : D*2^r XOR R = nG、R = D*2^r % G。<br/>
+      5.点对点链路（PPP、HDLC）、广播链路。<br/>
+      6.多路访问问题（multiple access problem）、多路访问协议（MAC）：信道划分、随机访问、依次轮流。<br/>
+      7.信道划分：时分、码分、频分、波分；<br/>
+        随机访问：时隙ALOHA、纯ALOHA、载波侦听多路访问CSMA；<br/>
+                 CSMA/CD冲突检测：边说边听、中止传输、强化冲突、二进制指数退避算法；<br/>
+                 无线局域网CSMA/CA冲突避免：确认帧、RTS-CTS预约；<br/>
+                 线缆接入网络：下行、上行（时隙）；<br/>
+        轮流访问：轮询、令牌传递。<br/>
+      8.局域网LAN：MAC地址（物理地址、LAN地址）；<br/>
+                  ARP地址解析协议：ARP表(IP、MAC、TTL)；<br/>
+                  以太网：集线器hub、交换机switch、以太网帧（前同步码）；<br/>
+                  交换机：过滤、转发、交换机表（自学习）；<br/>
+                  虚拟局域网VLAN、数据中心网络...。<br/>
     </p>
 </body>
 </html>
