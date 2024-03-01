@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计网笔记</title>
+</head>
+<body>
+    <h1>目录</h1>
+    <a href="https://www.bilibili.com/video/BV1JV411t7ow/?spm_id_from=333.999.0.0&vd_source=8814c55673559083f0880c3918024708">视频资料</a><br/>
+    <a href="./网络协议分析.pdf">网络协议整理资料</a><br/>
+    <a href="#1st">第一章、概述</a><br/>
+    <a href="#2nd">第二章、应用层</a><br/>
+    <a href="#3rd">第三章、传输层</a><br/>
+    <a href="#4th">第四章、网络层：数据平面</a><br/>
+    <a href="#5th">第五章、网络层：控制平面</a><br/>
+    <a href="#6th">第六章、链路层和局域网</a><br/>
+    <a href="#8th">第八章、网络安全</a><br/>
+    <h3 id="1st">概述</h3>
+    <p>
+        1.网络：节点、边、协议。<br/>
+        2.网络边缘edge、网络核心core、接入网access。<br/>
+        3.电路交换：频分、时分、波分；分组交换：排队延迟、丢失。<br/>
+        4.数据报datagram（随便发）、虚电路virtual circuit（有连接）；<br/>
+          猫modem、物理媒体、ISP、ICP（应用）。<br/>
+        5.分组延时：处理延时proc、排队延时queue、传输延时trans、传播延时prop；<br/>
+          流量强度：I=La/R(a：每单位时间要传分组的个数)。<br/>
+        6.应用层（报文message）、（表示层）、（会话层）、传输层（报文段segment）、<br/>
+          网络层（分组packet：数据报datapram（无连接））、链路层（帧frame）、物理层（位bit...）。<br/>
+    </p>
+    <h3 id="2nd">应用层</h3>
+    <p>
+      1.客户端-服务器C/S、P2P。<br/>
+      2.TCP socket 四元组:源IP、源端口、目标IP、目标端口、（状态）；<br/>
+        UDP socket 二元组:源IP、源端口。<br/>
+      3.数据丢失率、吞吐量、延迟、安全性。<br/>
+      4.TCP：可靠的传输服务、流量控制、拥塞控制、面向连接；<br/>
+        UDP：不可靠数据传输。<br/>
+      5.TCP、UDP不加密，安全套接字层SSL。<br/>
+      6.URL统一资源定位符(Uniform Resource Locator)：协议名、用户：口令、主机名、路径名、端口。<br/>
+      7.HTTP（无状态协议，不维护客户端状态）、持久（pipeline）与非持久；<br/>
+        请求报文：请求行、首部行、实体体；<br/>
+        回应报文：状态行、首部行、实体体；<br/>
+        维护客户端状态：cookie（双方存）。<br/>
+      8.Web缓存（代理服务器）、条件GET（检查是否修改）；<br/>
+        平均排队延迟：t=I/(1-I)*(L/R);(I/(1-I)为按概率推导出需等待分组的个数--><a href="https://blog.csdn.net/weixin_51825055/article/details/132845024?ops_request_misc=&request_id=&biz_id=102&utm_term=%E6%8E%92%E9%98%9F%E6%97%B6%E5%BB%B6%E6%B5%81%E9%87%8F%E5%BC%BA%E5%BA%A6%E5%85%AC%E5%BC%8F&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-2-132845024.142^v96^control&spm=1018.2226.3001.4187">解释</a>)。<br/>
+      9.FTP：21、20；SMTP：25，握手。<br/>
+      10.DNS：分布式、层次数据库（根、顶级、权威）；<br/>
+        RR资源记录格式：name,value,type,TTL生存时间（name、value取决于type）；<br/>
+        本地DNS服务器、缓存；<br/>
+      11.P2P：分发时间distributio tiom；<br/>
+        非结构化P2P：集中化目录、完全分布式（泛洪、ping、pong）、混合体；<br/>
+        DHT（结构化）P2P：BitTorrent洪流、块、追踪器、最稀缺优先、hash标识。<br/>
+      12.CDN（内容分发网inter deep、bring home）、视频流DASH（告示文件：不同版本）。<br/>
+      13.socket...。<br/>
+    </p>
+    <h3 id="3rd">传输层</h3>
+    <p>
+      1.多路复用、解复用：socket。<br/>
+      2.可靠数据传输（rdt）：<br/>
+        （stop and wait）<br/>
+        rdt1.0；<br/>
+        rdt2.0：ACK、NAK；<br/>
+        rdt2.1：序号1/0、ACK、NAK；<br/>
+        rdt2.2：ACK1/0;<br/>
+        rdt3.0:超时重传、ACK1/0；<br/>
+        （pipeline）<br/>
+        滑动窗口协议slide window：发送窗口SW(前沿、后沿)<=发送缓存区、接收窗口RW、ACKn；<br/>
+        Go-Back-N（GBN）：RW=1、全部超时重发；<br/>
+        选择重传SR（Selective Repeat）：RW>1、部分超时重发。<br/>
+      3.TCP：字节流（序号）、MMS最大报文段长度、MTU最大传输单元（帧）；<br/>
+        往返延迟RTT、超时重传间隔；<br/>
+        快速重传（3个冗余ACK）、ACK生成策略（RFC 5681）；<br/>
+        流量控制：空闲缓冲区大小。<br/>
+      4.TCP连接：3次握手(C->S:SYN=1,seq),(S->C:SYN=1,sqe,ack),(C->S:SYN=0,seq,ack);<br/>
+        4次挥手(C->S:FIN=1),(S->C:ACK),客户端等待,(S->C:FIN=1),(C->S:ACK)。<br/>
+      5.拥塞控制：网络辅助拥塞控制：反馈信息（阻塞分组等）；<br/>
+        端到端拥塞控制：TCP拥塞控制算法<br/>
+        慢启动SS（CongWin拥塞窗口）：cw0=1MMS，ACK->cw++(RTT->cw=cw*2)；<br/>
+        拥塞避免CA：cw时拥塞（超时），cw/2为阈值，进入慢启动即cw=1MSS，cw=cw*2，到阈值时cw++；<br/>
+        快速恢复：cw时微小拥塞（3个冗余ACK），cw=cw/2，进入拥塞避免即cw++。<br/>
+        公平性：TCP拥塞控制大致公平。<br/>
+    </p>
+    <h3 id="4th">网络层：数据平面</h3>
+    <p>
+      1.数据平面（转发）、控制平面（路由：传统、SDN）。<br/>
+      2.路由器（输入端口、交换结构、输出端口）：memory、bus、crossbar。<br/>
+      3.输入输出排队、分组调度。<br/>
+      4.IPv4：分片重组、（纯）子网、分类编址（A0/B10/C110/D1110）、特殊IP地址；<br/>
+        内网地址、无类域间路由（子网掩码、默认网关、子网前缀：聚集）动态主机配置协议DHCP；<br/>
+        网络地址转换NAT（内网地址）、NAT转换表、NAT穿越。<br/>
+      5.IPv6：隧道（v4->v6）。<br/>
+      6.SDN软件定义网络：流表、SDN控制器（南向、北向接口）。<br/>
+    </p>
+    <h3 id="5th">网络层：控制平面</h3>
+    <p>
+      1.路由选择算法：集中式（链路式LS）、分散式；静态、动态。<br/>
+      2.LS：Dijkstra算法、DV距离矢量算法（水平分裂/毒性逆转）。（c++算法简单实现--><a href="./LSDV.cpp">LSDV.cpp</a>）<br/>
+      3.RIP协议（DV）、OSPF协议（LS、边界）。<br/>
+      4.BGP边界网关协议：eBGP外部、iBGP内部、DV+路径。<br/>
+    </p>
+    <h3 id="6th">链路层和局域网</h3>
+    <p>
+      1.链路层服务：成帧、链路接入、可靠数据传输（部分）、流量控制、检查纠错、半双工与全双工。<br/>
+      2.网卡NIC（适配器）：MAC地址。<br/>
+      3.错误检测[D|EDC]:奇偶校验（单bit、2维）、CRC循环冗余校验码。<br/>
+      4.CRC：模2运算XOR、位串<-->多项式、生成多项式G（r+1位）、[D|R] : D*2^r XOR R = nG、R = D*2^r % G。<br/>
+      5.点对点链路（PPP、HDLC）、广播链路。<br/>
+      6.多路访问问题（multiple access problem）、多路访问协议（MAC）：信道划分、随机访问、依次轮流。<br/>
+      7.信道划分：时分、码分、频分、波分；<br/>
+        随机访问：时隙ALOHA、纯ALOHA、载波侦听多路访问CSMA；<br/>
+                 CSMA/CD冲突检测：边说边听、中止传输、强化冲突、二进制指数退避算法；<br/>
+                 无线局域网CSMA/CA冲突避免：确认帧、RTS-CTS预约；<br/>
+                 线缆接入网络：下行、上行（时隙）；<br/>
+        轮流访问：轮询、令牌传递。<br/>
+      8.局域网LAN：MAC地址（物理地址、LAN地址）；<br/>
+                  ARP地址解析协议：ARP表(IP、MAC、TTL)；<br/>
+                  以太网：集线器hub、交换机switch、以太网帧（前同步码）；<br/>
+                  交换机：过滤、转发、交换机表（自学习）；<br/>
+                  虚拟局域网VLAN、数据中心网络...。<br/>
+    </p>
+    <h3 id="8th">网络安全</h3>
+    <p>
+      1.安全通信：机密性、报文完整性、可认证性、访问控制和服务的可用性。<br/>
+      2.对称密钥加密：替换、块密码（DES、AES）、密码快链接；<br/>
+        公开密钥加密：私钥、公钥、RSA：x^y mod n = x^(y mod (p-1)*(q-1)) mod n;(n=pq,p、q为质数)、数字签名。<br/>
+      3.认证：鉴别密钥（对称）、公开（私钥加密、公钥解密）。<br/>
+      4.报文完整性：可验证性、不可伪造性、不可抵赖性；<br/>
+                   报文摘要（MD5、SHA）、数字签名。<br/>
+      5.KDC、CA证书（根证书、信任树）。<br/>
+      6.安全电子邮件（PGP）、传输层（SSL）、网络层（IPsec：AH、ESP）。<br/>
+      7.防火墙：DOS、DDOS、分组过滤器；<br/>
+              无状态分组过滤器（ACL）、有状态分组过滤器（应用程序网关）；<br/>
+              入侵检查系统IDS。<br/>
+      8.软件定义网络SDN：流表OpenFlow、数据命名网络NDN（Interest、Data）。<br/>
+    </p>
+</body>
+</html>
